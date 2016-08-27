@@ -1,0 +1,21 @@
+﻿@using PingBiao.Model
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>测试页面</h2>
+<table>
+    <tr>
+        <th>
+            标段名称
+        </th>
+    </tr>
+    <tr>
+        @foreach (var item in Model as List<PingBiao_BiaoDuan>)
+        {
+            <td>
+                @Model.BiaoDuanName
+            </td>
+        }   
+    </tr>
+</table>

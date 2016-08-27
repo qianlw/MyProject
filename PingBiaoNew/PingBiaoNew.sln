@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingBiao.Service", "PingBiao.Service\PingBiao.Service.csproj", "{D541D44E-3AD9-4F01-9FF7-DE389D8740EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingBiao.Model", "PingBiao.Model\PingBiao.Model.csproj", "{A063D6D5-5BA2-4AEE-8D39-3D5DC06C1750}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingBiao.Common", "PingBiao.Common\PingBiao.Common.csproj", "{2D73DFF7-D4D7-4BB2-B027-9773EF00DDFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingBiao.IService", "PingBiao.IService\PingBiao.IService.csproj", "{FB513055-3949-4F2F-864C-07778A730E79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingBiao.Logic", "PingBiao.Logic\PingBiao.Logic.csproj", "{3B86859A-5835-4BBB-B966-8A277A12ADB8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PingBiao.UI", "PingBiao.UI", "{C083A1DF-03A9-4FF1-83C7-D5FA9D122AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingBiao.Web", "PingBiao.Web\PingBiao.Web.csproj", "{CD076374-4F50-40D2-98F2-8E75F6DF43FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D541D44E-3AD9-4F01-9FF7-DE389D8740EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D541D44E-3AD9-4F01-9FF7-DE389D8740EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D541D44E-3AD9-4F01-9FF7-DE389D8740EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D541D44E-3AD9-4F01-9FF7-DE389D8740EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A063D6D5-5BA2-4AEE-8D39-3D5DC06C1750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A063D6D5-5BA2-4AEE-8D39-3D5DC06C1750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A063D6D5-5BA2-4AEE-8D39-3D5DC06C1750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A063D6D5-5BA2-4AEE-8D39-3D5DC06C1750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D73DFF7-D4D7-4BB2-B027-9773EF00DDFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D73DFF7-D4D7-4BB2-B027-9773EF00DDFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D73DFF7-D4D7-4BB2-B027-9773EF00DDFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D73DFF7-D4D7-4BB2-B027-9773EF00DDFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB513055-3949-4F2F-864C-07778A730E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB513055-3949-4F2F-864C-07778A730E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB513055-3949-4F2F-864C-07778A730E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB513055-3949-4F2F-864C-07778A730E79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B86859A-5835-4BBB-B966-8A277A12ADB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B86859A-5835-4BBB-B966-8A277A12ADB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B86859A-5835-4BBB-B966-8A277A12ADB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B86859A-5835-4BBB-B966-8A277A12ADB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD076374-4F50-40D2-98F2-8E75F6DF43FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD076374-4F50-40D2-98F2-8E75F6DF43FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD076374-4F50-40D2-98F2-8E75F6DF43FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD076374-4F50-40D2-98F2-8E75F6DF43FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B86859A-5835-4BBB-B966-8A277A12ADB8} = {C083A1DF-03A9-4FF1-83C7-D5FA9D122AC1}
+		{CD076374-4F50-40D2-98F2-8E75F6DF43FF} = {C083A1DF-03A9-4FF1-83C7-D5FA9D122AC1}
+	EndGlobalSection
+EndGlobal
