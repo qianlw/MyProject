@@ -16,10 +16,11 @@ namespace PingBiao.Service
     /// 业务父类
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class BaseService<T> : IBaseService<T> where T : class
+    public class BaseService<T>  where T : class
     {
         //1.定义EF上下文
         Bid_PBEntities db = new Bid_PBEntities();
+
         //2.定义增删改查       
 
         #region 1.0 新增 实体 +int Add(T model)
@@ -28,7 +29,7 @@ namespace PingBiao.Service
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public int Add(T model)
+        public virtual int Add(T model)
         {
             db.Set<T>().Add(model);
             return db.SaveChanges();//保存成功后，会将自增的id设置给 model的 主键属性，并返回受影响行数
@@ -41,7 +42,7 @@ namespace PingBiao.Service
         /// </summary>
         /// <param name="model">包含要删除id的对象</param>
         /// <returns></returns>
-        public int Del(T model)
+        public virtual int Del(T model)
         {
             db.Set<T>().Attach(model);
             db.Set<T>().Remove(model);
@@ -55,7 +56,7 @@ namespace PingBiao.Service
         /// </summary>
         /// <param name="delWhere"></param>
         /// <returns></returns>
-        public int DelBy(Expression<Func<T, bool>> delWhere)
+        public virtual int DelBy(Expression<Func<T, bool>> delWhere)
         {
             //3.1查询要删除的数据
             List<T> listDeleting = db.Set<T>().Where(delWhere).ToList();
@@ -79,7 +80,7 @@ namespace PingBiao.Service
         /// <param name="model">要修改的实体对象</param>
         /// <param name="proNames">要修改的 属性 名称</param>
         /// <returns></returns>
-        public int Modify(T model, params string[] proNames)
+        public virtual int Modify(T model, params string[] proNames)
         {
             //4.1将 对象 添加到 EF中
             DbEntityEntry entry = db.Entry<T>(model);
@@ -104,7 +105,7 @@ namespace PingBiao.Service
         /// <param name="whereLambda">查询条件</param>
         /// <param name="proNames">要修改的 属性 名称</param>
         /// <returns></returns>
-        public int ModifyBy(T model, Expression<Func<T, bool>> whereLambda, params string[] modifiedProNames)
+        public virtual int ModifyBy(T model, Expression<Func<T, bool>> whereLambda, params string[] modifiedProNames)
         {
             //4.1查询要修改的数据
             List<T> listModifing = db.Set<T>().Where(whereLambda).ToList();
@@ -154,7 +155,7 @@ namespace PingBiao.Service
         /// </summary>
         /// <param name="whereLambda"></param>
         /// <returns></returns>
-        public List<T> GetListBy(Expression<Func<T, bool>> whereLambda)
+        public virtual List<T> GetListBy(Expression<Func<T, bool>> whereLambda)
         {
             return db.Set<T>().Where(whereLambda).ToList();
         }
@@ -168,7 +169,7 @@ namespace PingBiao.Service
         /// <param name="whereLambda">查询条件 lambda表达式</param>
         /// <param name="orderLambda">排序条件 lambda表达式</param>
         /// <returns></returns>
-        public List<T> GetListBy<TKey>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderLambda)
+        public virtual List<T> GetListBy<TKey>(Expression<Func<T, bool>> whereLambda, Expression<Func<T, TKey>> orderLambda)
         {
             return db.Set<T>().Where(whereLambda).OrderBy(orderLambda).ToList();
         }
@@ -191,13 +192,7 @@ namespace PingBiao.Service
         #endregion
 
 
-        public void Dispose()
-        {
-            if (this.db != null)
-            {
-                this.db.Dispose();
-            }
-        }
+        
 
     }
 }

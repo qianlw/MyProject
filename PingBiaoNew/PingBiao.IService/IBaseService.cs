@@ -11,7 +11,7 @@ namespace PingBiao.IService
     /// 业务父接口
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IBaseService<T> : IDisposable where T : class
+    public interface IBaseService<T> where T : class
     {
         //定义增删改查接口
         #region 1.0 新增 实体 +int Add(T model)
