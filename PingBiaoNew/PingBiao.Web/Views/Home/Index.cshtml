@@ -1,4 +1,4 @@
-﻿@using PingBiao.Model
+﻿@model PingBiao.Model.PingBiao_BiaoDuan
 @{
     ViewBag.Title = "Index";
 }
@@ -11,11 +11,8 @@
         </th>
     </tr>
     <tr>
-        @foreach (var item in Model as List<PingBiao_BiaoDuan>)
-        {
-            <td>
-                @Model.BiaoDuanName
-            </td>
-        }   
+        <td>
+            @ViewBag.Test
+        </td>
     </tr>
 </table>

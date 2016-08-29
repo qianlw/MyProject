@@ -20,6 +20,7 @@ namespace PingBiao.Service
     {
         //1.定义EF上下文
         Bid_PBEntities db = new Bid_PBEntities();
+        
 
         //2.定义增删改查       
 
