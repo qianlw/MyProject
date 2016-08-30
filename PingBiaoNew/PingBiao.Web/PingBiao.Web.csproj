@@ -130,6 +130,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\AdminCookieContext.cs" />
+    <Compile Include="Common\Base\CookieContext.cs" />
+    <Compile Include="Common\IAuthCookie.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2013,6 +2016,7 @@
     <Content Include="assets\scripts\ui-nouisliders.js" />
     <Content Include="assets\scripts\ui-toastr.js" />
     <Content Include="assets\scripts\ui-tree.js" />
+    <Content Include="Config\AdminMenuConfig.xml" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -2367,6 +2371,18 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PingBiao.Common\PingBiao.Common.csproj">
+      <Project>{2d73dff7-d4d7-4bb2-b027-9773ef00ddfa}</Project>
+      <Name>PingBiao.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PingBiao.Core.Cache\PingBiao.Core.Cache.csproj">
+      <Project>{6bb7cec6-8d86-4d3e-9708-2191ce3dace5}</Project>
+      <Name>PingBiao.Core.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PingBiao.Core.Config\PingBiao.Core.Config.csproj">
+      <Project>{50edd45b-eaa8-4d3e-a758-a08adfafbe20}</Project>
+      <Name>PingBiao.Core.Config</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PingBiao.Logic\PingBiao.Logic.csproj">
       <Project>{3b86859a-5835-4bbb-b966-8a277a12adb8}</Project>
       <Name>PingBiao.Logic</Name>

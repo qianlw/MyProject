@@ -1,4 +1,9 @@
-﻿<!-- BEGIN SIDEBAR -->
+﻿@using PingBiao.Core.Config
+@{
+    var adminMenuConfig = CachedConfigContext.Current.AdminMenuConfig;
+    //var permissions = AdminUserContext.Current.LoginInfo.BusinessPermissionList.Select(p => p.ToString());
+}
+<!-- BEGIN SIDEBAR -->
 <div class="page-sidebar navbar-collapse collapse">
     <!-- BEGIN SIDEBAR MENU -->
     <ul class="page-sidebar-menu">
@@ -20,7 +25,42 @@
             </form>
             <!-- END RESPONSIVE QUICK SEARCH FORM -->
         </li>
-        <li class="start active ">
+        @foreach (var group in adminMenuConfig.AdminMenuGroups)
+        {
+            if (!string.IsNullOrEmpty(group.Permission) && true)
+            {
+                continue;
+            }
+
+            var menus = group.AdminMenuArray.Where(m => string.IsNullOrEmpty(m.Permission) || true);
+            var hasSub = menus.Count() > 0;
+
+            if (!hasSub && string.IsNullOrEmpty(group.Url))
+            {
+                continue;
+            }
+
+            <li class="@(hasSub?"has-sub":string.Empty)">
+                <a href="@(hasSub ? "javascript:;" : group.Url)" title="@group.Info">
+                    <i class="@group.Icon"></i>
+                    <span class="title">@group.Name</span>
+                    @if (hasSub)
+                    {
+                        <span class='arrow'></span>
+                    }
+                </a>
+                @if (hasSub)
+                {
+                    <ul class="sub">
+                        @foreach (var menu in menus)
+                        {
+                            <li><a href="@menu.Url" title="@menu.Info">@menu.Name</a></li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+        @*<li class="start active ">
             <a href="index.html">
                 <i class="fa fa-home"></i>
                 <span class="title">Dashboard</span>
@@ -597,7 +637,7 @@
                 <i class="fa fa-bar-chart-o"></i>
                 <span class="title">Visual Charts</span>
             </a>
-        </li>
+        </li>*@
     </ul>
     <!-- END SIDEBAR MENU -->
 </div>

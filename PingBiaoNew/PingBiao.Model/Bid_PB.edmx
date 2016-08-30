@@ -4,7 +4,21 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PingBiao.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PingBiao.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="LoginToken" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LastAccessTime" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BusinessPermissionString" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ClientIP" Type="nvarchar" MaxLength="90" />
+          <Property Name="EnumLoginAccountType" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="PingBiao_BiaoDuan">
           <Key>
             <PropertyRef Name="Row_ID" />
@@ -165,6 +179,13 @@
           <Property Name="XunBiaoEndDate" Type="datetime" />
           <Property Name="XunBiaoEndOperator" Type="nvarchar" MaxLength="50" />
           <Property Name="IsLiuBiao" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsUploadFile" Type="nvarchar" MaxLength="50" />
+          <Property Name="DecrZB_Date_SXF_Eco" Type="datetime" />
+          <Property Name="KaiBiaoEndTime_SXF_Eco" Type="datetime" />
+          <Property Name="KaiBiaoEndOperator_SXF_Eco" Type="nvarchar" MaxLength="250" />
+          <Property Name="YiChangQK_SXF_Eco" Type="nvarchar" MaxLength="3000" />
+          <Property Name="IsEconMarkConfirm" Type="nvarchar" MaxLength="50" />
+          <Property Name="YiFaZhaoBiaoQk" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Bid_PB.dbo.PingBiao_BiaoDuanExt”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -333,8 +354,8 @@
           <Property Name="TBFileGuid" Type="nvarchar" MaxLength="50" />
           <Property Name="TBFileName" Type="nvarchar" MaxLength="50" />
           <Property Name="IsChuBuPass" Type="nvarchar" MaxLength="50" />
-          <Property Name="TBFileAttchGuid" Type="nvarchar" MaxLength="50" />
-          <Property Name="TBFileAttachConnectionString" Type="nvarchar" MaxLength="200" />
+          <Property Name="TBFileAttchGuid" Type="nvarchar" MaxLength="100" />
+          <Property Name="TBFileAttachConnectionString" Type="nvarchar" MaxLength="400" />
           <Property Name="TBImportPercent" Type="int" />
           <Property Name="DigitalEnvelope" Type="ntext" />
           <Property Name="IsPayForBzj" Type="nvarchar" MaxLength="1" />
@@ -404,6 +425,11 @@
           <Property Name="ZBRRemark" Type="nvarchar" MaxLength="500" />
           <Property Name="XunBiao_Status" Type="nvarchar" MaxLength="50" />
           <Property Name="IsEcoSucceed" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPR_DATE_SXF_Eco" Type="datetime" />
+          <Property Name="isjiemi_SXF_Eco" Type="nvarchar" MaxLength="50" />
+          <Property Name="DecrTB_UnitName_SXF_Eco" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsUseDisk_SXF_Eco" Type="nvarchar" MaxLength="50" />
+          <Property Name="DecrTBJieMi_Date_SXF_Eco" Type="datetime" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Bid_PB.dbo.PingBiao_PW_LoginInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -475,6 +501,8 @@
           <Property Name="PBTimes" Type="nvarchar" MaxLength="50" />
           <Property Name="IP" Type="nvarchar" MaxLength="50" />
           <Property Name="PWYJ" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsUploadFile" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
         </EntityType>
         <!--生成过程中发现错误:
 警告 6002: 表/视图“Bid_PB.dbo.PingBiao_Pw_Mark”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
@@ -504,6 +532,7 @@
           <Property Name="MarkReasonPic" Type="ntext" />
         </EntityType>
         <EntityContainer Name="PingBiaoModelStoreContainer">
+          <EntitySet Name="LoginInfo" EntityType="Self.LoginInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PingBiao_BiaoDuan" EntityType="Self.PingBiao_BiaoDuan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PingBiao_BiaoDuanExt" EntityType="Self.PingBiao_BiaoDuanExt" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -726,7 +755,12 @@
     [PingBiao_KaiBiaoTouBiao].[TBFileStorageData] AS [TBFileStorageData], 
     [PingBiao_KaiBiaoTouBiao].[ZBRRemark] AS [ZBRRemark], 
     [PingBiao_KaiBiaoTouBiao].[XunBiao_Status] AS [XunBiao_Status], 
-    [PingBiao_KaiBiaoTouBiao].[IsEcoSucceed] AS [IsEcoSucceed]
+    [PingBiao_KaiBiaoTouBiao].[IsEcoSucceed] AS [IsEcoSucceed], 
+    [PingBiao_KaiBiaoTouBiao].[UPR_DATE_SXF_Eco] AS [UPR_DATE_SXF_Eco], 
+    [PingBiao_KaiBiaoTouBiao].[isjiemi_SXF_Eco] AS [isjiemi_SXF_Eco], 
+    [PingBiao_KaiBiaoTouBiao].[DecrTB_UnitName_SXF_Eco] AS [DecrTB_UnitName_SXF_Eco], 
+    [PingBiao_KaiBiaoTouBiao].[IsUseDisk_SXF_Eco] AS [IsUseDisk_SXF_Eco], 
+    [PingBiao_KaiBiaoTouBiao].[DecrTBJieMi_Date_SXF_Eco] AS [DecrTBJieMi_Date_SXF_Eco]
     FROM [dbo].[PingBiao_KaiBiaoTouBiao] AS [PingBiao_KaiBiaoTouBiao]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PingBiao_PW_LoginInfo" EntityType="Self.PingBiao_PW_LoginInfo" store:Type="Tables" store:Schema="dbo">
@@ -794,7 +828,9 @@
     [PingBiao_PW_LoginInfo].[DLPW_type] AS [DLPW_type], 
     [PingBiao_PW_LoginInfo].[PBTimes] AS [PBTimes], 
     [PingBiao_PW_LoginInfo].[IP] AS [IP], 
-    [PingBiao_PW_LoginInfo].[PWYJ] AS [PWYJ]
+    [PingBiao_PW_LoginInfo].[PWYJ] AS [PWYJ], 
+    [PingBiao_PW_LoginInfo].[IsUploadFile] AS [IsUploadFile], 
+    [PingBiao_PW_LoginInfo].[UpdateTime] AS [UpdateTime]
     FROM [dbo].[PingBiao_PW_LoginInfo] AS [PingBiao_PW_LoginInfo]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PingBiao_Pw_Mark" EntityType="Self.PingBiao_Pw_Mark" store:Type="Tables" store:Schema="dbo">
@@ -822,8 +858,7 @@
     FROM [dbo].[PingBiao_Pw_Mark] AS [PingBiao_Pw_Mark]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PingBiao.Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -987,6 +1022,13 @@
           <Property Name="XunBiaoEndDate" Type="DateTime" Precision="3" />
           <Property Name="XunBiaoEndOperator" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsLiuBiao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUploadFile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DecrZB_Date_SXF_Eco" Type="DateTime" Precision="3" />
+          <Property Name="KaiBiaoEndTime_SXF_Eco" Type="DateTime" Precision="3" />
+          <Property Name="KaiBiaoEndOperator_SXF_Eco" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="YiChangQK_SXF_Eco" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="IsEconMarkConfirm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YiFaZhaoBiaoQk" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PingBiao_BiaoDuanExt">
           <Key>
@@ -1145,8 +1187,8 @@
           <Property Name="TBFileGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TBFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsChuBuPass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TBFileAttchGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TBFileAttachConnectionString" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TBFileAttchGuid" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TBFileAttachConnectionString" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="TBImportPercent" Type="Int32" />
           <Property Name="DigitalEnvelope" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsPayForBzj" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
@@ -1216,6 +1258,11 @@
           <Property Name="ZBRRemark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="XunBiao_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsEcoSucceed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPR_DATE_SXF_Eco" Type="DateTime" Precision="3" />
+          <Property Name="isjiemi_SXF_Eco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DecrTB_UnitName_SXF_Eco" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsUseDisk_SXF_Eco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DecrTBJieMi_Date_SXF_Eco" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PingBiao_PW_LoginInfo">
           <Key>
@@ -1285,6 +1332,8 @@
           <Property Name="PBTimes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PWYJ" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUploadFile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PingBiao_Pw_Mark">
           <Key>
@@ -1320,7 +1369,22 @@
           <EntitySet Name="PingBiao_KaiBiaoTouBiao" EntityType="Self.PingBiao_KaiBiaoTouBiao" />
           <EntitySet Name="PingBiao_PW_LoginInfo" EntityType="Self.PingBiao_PW_LoginInfo" />
           <EntitySet Name="PingBiao_Pw_Mark" EntityType="Self.PingBiao_Pw_Mark" />
+          <EntitySet Name="LoginInfoes" EntityType="PingBiao.Model.LoginInfo" />
         </EntityContainer>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LoginToken" Type="Guid" Nullable="false" />
+          <Property Name="LastAccessTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessPermissionString" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ClientIP" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="EnumLoginAccountType" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1330,6 +1394,13 @@
           <EntitySetMapping Name="PingBiao_BiaoDuan">
             <EntityTypeMapping TypeName="PingBiao.Model.PingBiao_BiaoDuan">
               <MappingFragment StoreEntitySet="PingBiao_BiaoDuan">
+                <ScalarProperty Name="YiFaZhaoBiaoQk" ColumnName="YiFaZhaoBiaoQk" />
+                <ScalarProperty Name="IsEconMarkConfirm" ColumnName="IsEconMarkConfirm" />
+                <ScalarProperty Name="YiChangQK_SXF_Eco" ColumnName="YiChangQK_SXF_Eco" />
+                <ScalarProperty Name="KaiBiaoEndOperator_SXF_Eco" ColumnName="KaiBiaoEndOperator_SXF_Eco" />
+                <ScalarProperty Name="KaiBiaoEndTime_SXF_Eco" ColumnName="KaiBiaoEndTime_SXF_Eco" />
+                <ScalarProperty Name="DecrZB_Date_SXF_Eco" ColumnName="DecrZB_Date_SXF_Eco" />
+                <ScalarProperty Name="IsUploadFile" ColumnName="IsUploadFile" />
                 <ScalarProperty Name="BelongXiaQuCode" ColumnName="BelongXiaQuCode" />
                 <ScalarProperty Name="OperateUserName" ColumnName="OperateUserName" />
                 <ScalarProperty Name="OperateDate" ColumnName="OperateDate" />
@@ -1598,6 +1669,11 @@
           <EntitySetMapping Name="PingBiao_KaiBiaoTouBiao">
             <EntityTypeMapping TypeName="PingBiao.Model.PingBiao_KaiBiaoTouBiao">
               <MappingFragment StoreEntitySet="PingBiao_KaiBiaoTouBiao">
+                <ScalarProperty Name="DecrTBJieMi_Date_SXF_Eco" ColumnName="DecrTBJieMi_Date_SXF_Eco" />
+                <ScalarProperty Name="IsUseDisk_SXF_Eco" ColumnName="IsUseDisk_SXF_Eco" />
+                <ScalarProperty Name="DecrTB_UnitName_SXF_Eco" ColumnName="DecrTB_UnitName_SXF_Eco" />
+                <ScalarProperty Name="isjiemi_SXF_Eco" ColumnName="isjiemi_SXF_Eco" />
+                <ScalarProperty Name="UPR_DATE_SXF_Eco" ColumnName="UPR_DATE_SXF_Eco" />
                 <ScalarProperty Name="FileMiFeng" ColumnName="FileMiFeng" />
                 <ScalarProperty Name="GongQi" ColumnName="GongQi" />
                 <ScalarProperty Name="BaoZhengJin" ColumnName="BaoZhengJin" />
@@ -1726,6 +1802,8 @@
           <EntitySetMapping Name="PingBiao_PW_LoginInfo">
             <EntityTypeMapping TypeName="PingBiao.Model.PingBiao_PW_LoginInfo">
               <MappingFragment StoreEntitySet="PingBiao_PW_LoginInfo">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="IsUploadFile" ColumnName="IsUploadFile" />
                 <ScalarProperty Name="BelongXiaQuCode" ColumnName="BelongXiaQuCode" />
                 <ScalarProperty Name="OperateUserName" ColumnName="OperateUserName" />
                 <ScalarProperty Name="OperateDate" ColumnName="OperateDate" />
@@ -1816,6 +1894,21 @@
                 <ScalarProperty Name="DanWeiGcNO" ColumnName="DanWeiGcNO" />
                 <ScalarProperty Name="QingDanNo" ColumnName="QingDanNo" />
                 <ScalarProperty Name="MarkReasonPic" ColumnName="MarkReasonPic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginInfoes">
+            <EntityTypeMapping TypeName="PingBiao.Model.LoginInfo">
+              <MappingFragment StoreEntitySet="LoginInfo">
+                <ScalarProperty Name="EnumLoginAccountType" ColumnName="EnumLoginAccountType" />
+                <ScalarProperty Name="ClientIP" ColumnName="ClientIP" />
+                <ScalarProperty Name="BusinessPermissionString" ColumnName="BusinessPermissionString" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LastAccessTime" ColumnName="LastAccessTime" />
+                <ScalarProperty Name="LoginToken" ColumnName="LoginToken" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

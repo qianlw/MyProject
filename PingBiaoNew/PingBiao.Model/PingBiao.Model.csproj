@@ -65,6 +65,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Bid_PB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LoginInfo.cs">
+      <DependentUpon>Bid_PB.tt</DependentUpon>
+    </Compile>
     <Compile Include="PingBiao_BiaoDuan.cs">
       <DependentUpon>Bid_PB.tt</DependentUpon>
     </Compile>
@@ -98,6 +101,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Bid_PB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Bid_PB.edmx</DependentUpon>

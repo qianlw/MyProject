@@ -7,6 +7,10 @@ using System.Text;
 
 namespace PingBiao.IService
 {
+	public partial interface ILoginInfo : IBaseService<PingBiao.Model.LoginInfo>
+    {
+    }
+
 	public partial interface IPingBiao_BiaoDuan : IBaseService<PingBiao.Model.PingBiao_BiaoDuan>
     {
     }

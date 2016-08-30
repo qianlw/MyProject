@@ -33,5 +33,6 @@ namespace PingBiao.Model
         public virtual DbSet<PingBiao_KaiBiaoTouBiao> PingBiao_KaiBiaoTouBiao { get; set; }
         public virtual DbSet<PingBiao_PW_LoginInfo> PingBiao_PW_LoginInfo { get; set; }
         public virtual DbSet<PingBiao_Pw_Mark> PingBiao_Pw_Mark { get; set; }
+        public virtual DbSet<LoginInfo> LoginInfoes { get; set; }
     }
 }

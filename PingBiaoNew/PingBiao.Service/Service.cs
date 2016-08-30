@@ -6,6 +6,10 @@ using PingBiao.IService;
 
 namespace PingBiao.Service
 {
+	public partial class LoginInfo : BaseService<PingBiao.Model.LoginInfo>,ILoginInfo
+    {
+		
+    }
 	public partial class PingBiao_BiaoDuan : BaseService<PingBiao.Model.PingBiao_BiaoDuan>,IPingBiao_BiaoDuan
     {
 		
